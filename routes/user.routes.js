@@ -13,7 +13,7 @@ router.post('/bulk', userController.bulkCreate);
 
 // Get all users
 //router.get('/bulk', userController.bulkGet); // (if you have a bulk get route)
-router.get('/', authenticateToken, userController.findAll);
+router.get('/', userController.findAll);
 
 // Get a user by ID
 router.get('/:id', userController.findOne);

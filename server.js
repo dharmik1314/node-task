@@ -2,7 +2,6 @@ require('dotenv').config();
 const { Model } = require('sequelize');
 const sequelize = require('./config/database.js');
 const express = require('express');
-
 const { body, validationResult } = require('express-validator');
 const path = require('path');
 const { authenticateToken, loginRoute } = require('./middleware/auth.js');
@@ -19,12 +18,13 @@ require('dotenv').config()
 //middleware
 app.use(express.json());
 app.use(logger);
+app.use(express.static(path.join(__dirname))); // Serve static files from project root
 
 // Public login route for JWT token
 app.use('/api/login', loginRoutes);
 
 // Protect all /api/users routes with authentication
-app.use('/api/users', authenticateToken, userRoutes);
+app.use('/api/users', userRoutes);
 
 // Error-handling middleware
 app.use((err, req, res, next) => {
