@@ -21,7 +21,7 @@ app.use(logger);
 app.use(express.static(path.join(__dirname))); // Serve static files from project root
 
 // Public login route for JWT token
-app.use('/api/login', loginRoutes);
+app.use('/api/login',authenticateToken, loginRoutes);
 
 // Protect all /api/users routes with authentication
 app.use('/api/users', userRoutes);
